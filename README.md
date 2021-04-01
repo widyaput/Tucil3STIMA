@@ -1,2 +1,4 @@
 # Tucil3STIMA
 A Star Is Born
+
+SEMANGAT BANG KAESANG
