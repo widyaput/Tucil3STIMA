@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Map -->
+    <script type="text/javascript"
+        src="http://maps.google.com/maps/api/js?sensor=true&amp;key=AIzaSyCVDEqSic7R0aVM5soBLVdqbkSMe4ntV28"></script>
+        <script type="text/javascript">
+        // Langkah 4
+        function initialize() {
+        var latlng = new google.maps.LatLng(-6.4, 106.8186111);
+        var myOptions = {
+        zoom: 13,
+        center: latlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        // Langkah 3
+        var map = new google.maps.Map(document.getElementById("map_canvas"),
+        myOptions);
+        }
+    </script>
+    <!-- Map -->
+    <title>Hello, world!</title>
+  </head>
+  <body onload="initialize()" >
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="file:///C:/Users/M.%20Fahmi%20Alamsyah/Documents/GitHub/Learn-Website/HTML/My%20Portofolio.html#Projects">Projects</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="file:///C:/Users/M.%20Fahmi%20Alamsyah/Documents/GitHub/Learn-Website/HTML/My%20Portofolio.html#Home">Home</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="#">Credits</a>
+                </li>
+            </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Navbar -->
+
+    <!-- Visualisasi Peta-->
+    
+    
+    <!-- Visualisasi Peta-->
+
+    <div class="row text-center mb-3 mt-3">>
+                <div class="row justify-content-center fs-4 text-center">
+                    <div class="col-md-6">
+                        <div class="container2">
+                            <div id="map_canvas" style="width:600px; height:600px"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-5">
+                        <h3>
+                            Mari Cari Jalan Terdekat Menuju Tujuan Anda!
+                        </h3>
+                    </div>
+                </div>
+                
+            </div>
+    <h3>Hello</h3>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+
+  </body>
+</html>
