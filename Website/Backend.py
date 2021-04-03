@@ -1,16 +1,20 @@
 from flask import Flask, render_template
 import folium
+from branca.element import Figure
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    start_coords = (-6.1753924, 106.8271528)
-    folium_map = folium.Map(
-        location=start_coords, 
-        zoom_start=17
-    )
-    folium_map.save('templates/map.html')
+    fig5=Figure(height=550,width=750)
+    m5=folium.Map(location=[-6.887221,107.611479],tiles='cartodbpositron',zoom_start=17)
+    fig5.add_child(m5)
+    place1 = [[-6.887221,107.611479],[-6.884972,107.611512]]
+    f1=folium.FeatureGroup("Place 1")
+    line_1=folium.vector_layers.PolyLine(place1,popup='<b>Path of Place 1</b>',tooltip='Place 1',color='blue',weight=10).add_to(f1)
+    f1.add_to(m5)
+    folium.LayerControl().add_to(m5)
+    m5.save('templates/map.html')
     return render_template('GoogleMaps.html')
 
 @app.route('/map')
