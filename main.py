@@ -55,7 +55,10 @@ def distanceInMeter(lat, lng, lat0, lng0):
   return r*c 
 
 def bacaFile(namaFile):
-  f =open(namaFile, 'r')
+  try:
+    f =open(namaFile, 'r')
+  except IOError:
+    return [[]],[],[],False
   N = int(f.readline())
   adjMatrix = [[0 for i in range(N)] for i in range(N)]
   listNode = []
@@ -85,7 +88,7 @@ def bacaFile(namaFile):
     idx1 += 1
     line = f.readline()
   f.close()
-  return adjMatrix, listNode, listCoor
+  return adjMatrix, listNode, listCoor, True
 
 def find(array, element):
   try:
@@ -94,13 +97,94 @@ def find(array, element):
     return -1
   return array.index(element)
 
-if __name__ == '__main__':
-  adjMatrix, listNode, listCoor = bacaFile("graf.txt")
-  node1 = input()
-  node2 = input()
+def main(namaFile,node1,node2):
+  #bakal return adjMatrix (buat tau ada edgenya gak antar 2 simpul, biar bisa gambar pathnya di map)
+  #terus return listNode (buat tau nama-nama nodenya)
+  #return listCoor (buat tau coordinate masing-masing node)
+  #return path (isinya indeks-indeks node dari ListNode yang jadi path)
+  #mapping keempat list/matriks menggunakan indeks
+  #jadi kalau mau liat simpul ke 0 dari path namanya apa, tinggal panggil listNode[path[0]] dll
+
+  #return boolean FileFound (buat tau filenya valid gak)
+  #return boolean NodeFound (buat tau apa ada masukan node yang namanya salah, kalau ada yang salah NodeFound isinya False)
+  #return boolean PathFound (dari namanya harusnya tau lah ya ini flag nunjukin kalau pathnya ketemu apa gak)
+  # (ada lintasan dari node1 ke node 2 apa gak)
+  
+  #how to use:
+  #masukkin ae nama variable2nya
+  #contoh:
+  #adjMatrix, listNode, listCoor, path , isFileFound, isNodeFound, isPathFound = main(namaFile, node1,node2)
+  #sebelum ditampilin mapnya, dicek dulu kalau flag booleannya ada yang False
+  #misal if (not isFileFound ) : nampilin ke web kalau nama file salah 
+  # (sementara baca filenya di folder luar, barengan sama main.py, kalau mau bikin folder khusus nanti diganti sabi)
+  #if (not isNodeFound) : nampilin ke web kalau nama node salah
+  #if (not isPathFound) : nampilin ke web kalau tidak ada path dari node1 ke node2
+  #kalau lolos keduanya baru bisa gambar pathnya
+
+  #warning:
+  #kalau flag gak lolos, list path bakal direturn kosong, jadi harus cek flagnya dulu
+
+  adjMatrix, listNode, listCoor, isFileFound = bacaFile(namaFile)
+  if (not isFileFound):
+    return adjMatrix,listNode,listCoor,[],False,False,False
   idx1 = find(listNode,node1)
   idx2 = find(listNode,node2)
   if (idx1 == -1 or idx2 == -1):
+    return adjMatrix,listNode,listCoor,[],True,False,False
+  closed = []
+  queue = PrioQueueMod()
+  queue.insert((idx1,0,0))
+  parent = [0 for i in range(len(listNode))]
+  found = False
+  while (not queue.isEmpty() and not found):
+    dummy = queue.delete()
+    gcostParent = dummy[1]
+    current = dummy[0]
+    closed.append(current)
+
+    if current == idx2:
+      found = True
+    if (not found):
+      for i in range(len(listNode)):
+        if (adjMatrix[current][i] == 1 and find(closed,i) == -1):
+          gcost = gcostParent + distanceInMeter(listCoor[current][0],listCoor[current][1], listCoor[i][0], listCoor[i][1])
+          hcost = distanceInMeter(listCoor[i][0],listCoor[i][1],listCoor[idx2][0],listCoor[idx2][1])
+          if ((queue.isMember(i) and queue.getFnKey(i) > gcost+hcost) or not queue.isMember(i)):
+            parent[i] = current
+            queue.insert((i,gcost,hcost))
+
+
+  if not found:
+    return adjMatrix,listNode,listCoor,[],True,True,False
+  path = []
+  path.append(idx2)
+  dummy = idx2
+  while (dummy != idx1):
+    path.append(parent[dummy])
+    dummy = parent[dummy]
+  path.reverse()
+  return adjMatrix,listNode,listCoor,path,True,True,True
+  # for i in range(len(path)):
+  #   if i == len(path)-1:
+  #     print(listNode[path[i]])
+  #   else:
+  #     print(listNode[path[i]]+"->", end="")
+
+
+#for testing
+"""
+if __name__ == '__main__':
+  namaFile = input()
+  node1 = input()
+  node2 = input()
+  adjMatrix, listNode, listCoor, isFileFound = bacaFile(namaFile)
+  if (not isFileFound):
+    print("NamaFile salah")
+    exit()
+  idx1 = find(listNode,node1)
+  idx2 = find(listNode,node2)
+  if (idx1 == -1 or idx2 == -1):
+    print("Nama node salah")
     exit()
   closed = []
   queue = PrioQueueMod()
@@ -126,6 +210,7 @@ if __name__ == '__main__':
 
 
   if not found:
+    print("Path tidak ditemukan")
     exit()
   path = []
   path.append(idx2)
@@ -139,3 +224,4 @@ if __name__ == '__main__':
       print(listNode[path[i]])
     else:
       print(listNode[path[i]]+"->", end="")
+"""
