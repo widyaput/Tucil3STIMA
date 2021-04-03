@@ -55,12 +55,16 @@ def distanceInMeter(lat, lng, lat0, lng0):
   return r*c 
 
 def bacaFile(namaFile):
+  #ini buat baca grafnya
+  #yang direturn : adjMatrix, listNode, listCoor, status
+  #status nandain berhasil buka atau gak
+  #walau kayanya nanti maneh setting biar selalu berhasil hehe
   try:
     f =open(namaFile, 'r')
   except IOError:
     return [[]],[],[],False
   N = int(f.readline())
-  adjMatrix = [[0 for i in range(N)] for i in range(N)]
+  adjMatrix = [[(-1) for i in range(N)] for i in range(N)]
   listNode = []
   listCoor = []
 
@@ -81,10 +85,12 @@ def bacaFile(namaFile):
     idxSpace = line.find(" ")
     idx2 = 0
     while (idxSpace != -1):
-      adjMatrix[idx1][idx2] = int(line[dummy:idxSpace])
+      adjMatrix[idx1][idx2] = int(line[dummy:(idxSpace+1)])
       dummy = idxSpace +1
       idxSpace = line.find(" ", dummy)
       idx2 += 1
+    if (idx1 == N-1) : adjMatrix[idx1][idx2] = int(line[dummy:])
+    else : adjMatrix[idx1][idx2] = int(line[dummy:-1])
     idx1 += 1
     line = f.readline()
   f.close()
@@ -97,15 +103,32 @@ def find(array, element):
     return -1
   return array.index(element)
 
-def main(namaFile,node1,node2):
-  #bakal return adjMatrix (buat tau ada edgenya gak antar 2 simpul, biar bisa gambar pathnya di map)
-  #terus return listNode (buat tau nama-nama nodenya)
-  #return listCoor (buat tau coordinate masing-masing node)
+def isWeightedGraf(adjMatrix):
+  for i in range(len(adjMatrix)):
+    for j in range(len(adjMatrix[i])):
+      if (adjMatrix[i][j] > 1):
+        return True
+  return False
+
+def hitungJarakPath(adjMatrix,path,listCoor):
+  jarak = 0
+  if (isWeightedGraf(adjMatrix)):
+    current = 0
+    while (current != len(path)-1):
+      jarak+= adjMatrix[path[current]][path[current+1]]
+      current+=1
+  else:
+    current = 0
+    while (current != len(path)-1):
+      jarak+= distanceInMeter(listCoor[path[current]][0],listCoor[path[current]][1], listCoor[path[current+1]][0],listCoor[path[current+1]][1])
+      current += 1
+  return jarak
+def main(adjMatrix,listNode,listCoor,node1,node2):
+  #ASUMSI : BACA FILE BERHASIL, SEHINGGA ADJMATRIX LISTNODE LISTCOOR TINGGAL DIPAKE
   #return path (isinya indeks-indeks node dari ListNode yang jadi path)
   #mapping keempat list/matriks menggunakan indeks
   #jadi kalau mau liat simpul ke 0 dari path namanya apa, tinggal panggil listNode[path[0]] dll
 
-  #return boolean FileFound (buat tau filenya valid gak)
   #return boolean NodeFound (buat tau apa ada masukan node yang namanya salah, kalau ada yang salah NodeFound isinya False)
   #return boolean PathFound (dari namanya harusnya tau lah ya ini flag nunjukin kalau pathnya ketemu apa gak)
   # (ada lintasan dari node1 ke node 2 apa gak)
@@ -113,10 +136,7 @@ def main(namaFile,node1,node2):
   #how to use:
   #masukkin ae nama variable2nya
   #contoh:
-  #adjMatrix, listNode, listCoor, path , isFileFound, isNodeFound, isPathFound = main(namaFile, node1,node2)
-  #sebelum ditampilin mapnya, dicek dulu kalau flag booleannya ada yang False
-  #misal if (not isFileFound ) : nampilin ke web kalau nama file salah 
-  # (sementara baca filenya di folder luar, barengan sama main.py, kalau mau bikin folder khusus nanti diganti sabi)
+  #path , isNodeFound, isPathFound = main(adjMatrix, listNode, listCoor, node1,node2)
   #if (not isNodeFound) : nampilin ke web kalau nama node salah
   #if (not isPathFound) : nampilin ke web kalau tidak ada path dari node1 ke node2
   #kalau lolos keduanya baru bisa gambar pathnya
@@ -124,13 +144,10 @@ def main(namaFile,node1,node2):
   #warning:
   #kalau flag gak lolos, list path bakal direturn kosong, jadi harus cek flagnya dulu
 
-  adjMatrix, listNode, listCoor, isFileFound = bacaFile(namaFile)
-  if (not isFileFound):
-    return adjMatrix,listNode,listCoor,[],False,False,False
   idx1 = find(listNode,node1)
   idx2 = find(listNode,node2)
   if (idx1 == -1 or idx2 == -1):
-    return adjMatrix,listNode,listCoor,[],True,False,False
+    return [],False,False
   closed = []
   queue = PrioQueueMod()
   queue.insert((idx1,0,0))
@@ -146,7 +163,7 @@ def main(namaFile,node1,node2):
       found = True
     if (not found):
       for i in range(len(listNode)):
-        if (adjMatrix[current][i] == 1 and find(closed,i) == -1):
+        if (adjMatrix[current][i] != 0 and find(closed,i) == -1):
           gcost = gcostParent + distanceInMeter(listCoor[current][0],listCoor[current][1], listCoor[i][0], listCoor[i][1])
           hcost = distanceInMeter(listCoor[i][0],listCoor[i][1],listCoor[idx2][0],listCoor[idx2][1])
           if ((queue.isMember(i) and queue.getFnKey(i) > gcost+hcost) or not queue.isMember(i)):
@@ -155,7 +172,7 @@ def main(namaFile,node1,node2):
 
 
   if not found:
-    return adjMatrix,listNode,listCoor,[],True,True,False
+    return [],True,False
   path = []
   path.append(idx2)
   dummy = idx2
@@ -163,7 +180,7 @@ def main(namaFile,node1,node2):
     path.append(parent[dummy])
     dummy = parent[dummy]
   path.reverse()
-  return adjMatrix,listNode,listCoor,path,True,True,True
+  return path,True,True
   # for i in range(len(path)):
   #   if i == len(path)-1:
   #     print(listNode[path[i]])
@@ -172,56 +189,39 @@ def main(namaFile,node1,node2):
 
 
 #for testing
-"""
+
 if __name__ == '__main__':
-  namaFile = input()
-  node1 = input()
-  node2 = input()
-  adjMatrix, listNode, listCoor, isFileFound = bacaFile(namaFile)
-  if (not isFileFound):
+  namaFile = input() #input graf
+  node1 = input() #input nama node1
+  node2 = input() #input nama node2
+  #input nama node bisa dilakukan sesudah baca graf, jadi santuy
+
+  adjMatrix, listNode, listCoor, isFileFound = bacaFile(namaFile) #ini nanti baca grafnya
+  if (not isFileFound): #nanti maneh bisa bikin grafnya kebaca terus jadinya ini harusnya keskip
     print("NamaFile salah")
     exit()
-  idx1 = find(listNode,node1)
-  idx2 = find(listNode,node2)
-  if (idx1 == -1 or idx2 == -1):
-    print("Nama node salah")
-    exit()
-  closed = []
-  queue = PrioQueueMod()
-  queue.insert((idx1,0,0))
-  parent = [0 for i in range(len(listNode))]
-  found = False
-  while (not queue.isEmpty() and not found):
-    dummy = queue.delete()
-    gcostParent = dummy[1]
-    current = dummy[0]
-    closed.append(current)
-
-    if current == idx2:
-      found = True
-    if (not found):
-      for i in range(len(listNode)):
-        if (adjMatrix[current][i] == 1 and find(closed,i) == -1):
-          gcost = gcostParent + distanceInMeter(listCoor[current][0],listCoor[current][1], listCoor[i][0], listCoor[i][1])
-          hcost = distanceInMeter(listCoor[i][0],listCoor[i][1],listCoor[idx2][0],listCoor[idx2][1])
-          if ((queue.isMember(i) and queue.getFnKey(i) > gcost+hcost) or not queue.isMember(i)):
-            parent[i] = current
-            queue.insert((i,gcost,hcost))
-
-
-  if not found:
+  path, isNodeFound, isPathFound = main(adjMatrix,listNode,listCoor,node1,node2) #ini buat ngeliat ada pathnya gak
+  
+  if (not isNodeFound): #cek flag nodefound
+    print("Node tidak ditemukan")
+    exit() #kalau gak ketemu kasi pesan eror
+  elif (not isPathFound):
     print("Path tidak ditemukan")
-    exit()
-  path = []
-  path.append(idx2)
-  dummy = idx2
-  while (dummy != idx1):
-    path.append(parent[dummy])
-    dummy = parent[dummy]
-  path.reverse()
+    exit() #ini juga kalau error
+
+  #kalau sampai sini aman
+  #bisa mulai gambar
+
+  #untuk ngecek apakah node i dan j dihubungkan 1 sisi atau gak -> cek adjMatrix[i][j] jika isinya 0 berarti gak berhubungan
+  #untuk cek coordinat simpul ke i dari listNode tinggal pilih listCoor[i] (isinya tuple, yang pertama lat kedua long)
+  #harusnya bisa lah ya kan alam gitu lho hehe
+  
+  #ini buat nampilin pake panah2 gitu jadi maneh gk usah liat
   for i in range(len(path)):
     if i == len(path)-1:
       print(listNode[path[i]])
     else:
       print(listNode[path[i]]+"->", end="")
-"""
+  #nah kalau mau hitung jaraknya bisa pake ini hitungJarakPath, jaraknya dalam meter
+  print("Jaraknya adalah " + str(hitungJarakPath(adjMatrix,path,listCoor)) + " meter")
+
