@@ -78,12 +78,12 @@ def bacaFile(namaFile):
   line = f.readline()
   while line != "":
     dummy = 0
-    idxSpace = 1
+    idxSpace = line.find(" ")
     idx2 = 0
-    while (idxSpace != 2*N -1):
+    while (idxSpace != -1):
       adjMatrix[idx1][idx2] = int(line[dummy:(idxSpace+1)])
       dummy = idxSpace +1
-      idxSpace = idxSpace+2
+      idxSpace = line.find(" ", dummy)
       idx2 += 1
     if (idx1 == N-1) : adjMatrix[idx1][idx2] = int(line[dummy:])
     else : adjMatrix[idx1][idx2] = int(line[dummy:-1])
@@ -148,7 +148,7 @@ def main(namaFile,node1,node2):
       found = True
     if (not found):
       for i in range(len(listNode)):
-        if (adjMatrix[current][i] == 1 and find(closed,i) == -1):
+        if (adjMatrix[current][i] != 0 and find(closed,i) == -1):
           gcost = gcostParent + distanceInMeter(listCoor[current][0],listCoor[current][1], listCoor[i][0], listCoor[i][1])
           hcost = distanceInMeter(listCoor[i][0],listCoor[i][1],listCoor[idx2][0],listCoor[idx2][1])
           if ((queue.isMember(i) and queue.getFnKey(i) > gcost+hcost) or not queue.isMember(i)):
@@ -219,7 +219,7 @@ if __name__ == '__main__':
         # print(str(current) +" " +str(i))
         # print(adjMatrix[current][i])
         # print(closed)
-        if (adjMatrix[current][i] == 1 and find(closed,i) == -1):
+        if (adjMatrix[current][i] != 0 and find(closed,i) == -1):
           # print("Yes")
           gcost = gcostParent + distanceInMeter(listCoor[current][0],listCoor[current][1], listCoor[i][0], listCoor[i][1])
           hcost = distanceInMeter(listCoor[i][0],listCoor[i][1],listCoor[idx2][0],listCoor[idx2][1])
