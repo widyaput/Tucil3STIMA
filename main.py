@@ -60,7 +60,7 @@ def bacaFile(namaFile):
   except IOError:
     return [[]],[],[],False
   N = int(f.readline())
-  adjMatrix = [[0 for i in range(N)] for i in range(N)]
+  adjMatrix = [[(-1) for i in range(N)] for i in range(N)]
   listNode = []
   listCoor = []
 
@@ -78,13 +78,15 @@ def bacaFile(namaFile):
   line = f.readline()
   while line != "":
     dummy = 0
-    idxSpace = line.find(" ")
+    idxSpace = 1
     idx2 = 0
-    while (idxSpace != -1):
-      adjMatrix[idx1][idx2] = int(line[dummy:idxSpace])
+    while (idxSpace != 2*N -1):
+      adjMatrix[idx1][idx2] = int(line[dummy:(idxSpace+1)])
       dummy = idxSpace +1
-      idxSpace = line.find(" ", dummy)
+      idxSpace = idxSpace+2
       idx2 += 1
+    if (idx1 == N-1) : adjMatrix[idx1][idx2] = int(line[dummy:])
+    else : adjMatrix[idx1][idx2] = int(line[dummy:-1])
     idx1 += 1
     line = f.readline()
   f.close()
@@ -178,6 +180,12 @@ if __name__ == '__main__':
   node1 = input()
   node2 = input()
   adjMatrix, listNode, listCoor, isFileFound = bacaFile(namaFile)
+  # for i in range(len(listNode)):
+  #   for j in range(len(listNode)):
+  #     if (j != len(listNode)-1):
+  #       print(adjMatrix[i][j],end=" ")
+  #     else:
+  #       print(adjMatrix[i][j])
   if (not isFileFound):
     print("NamaFile salah")
     exit()
@@ -191,17 +199,28 @@ if __name__ == '__main__':
   queue.insert((idx1,0,0))
   parent = [0 for i in range(len(listNode))]
   found = False
+  # print(adjMatrix[9][5])
+  # print(adjMatrix[5][9])
   while (not queue.isEmpty() and not found):
+    # queue.show()
     dummy = queue.delete()
     gcostParent = dummy[1]
     current = dummy[0]
     closed.append(current)
-
+    # print("yyet")
+    # print(listNode[current])
+    # for i in range(len(closed)):
+    #   print(listNode[closed[i]])
     if current == idx2:
       found = True
     if (not found):
       for i in range(len(listNode)):
+        # print(listNode[current] + " dengan " +listNode[i])
+        # print(str(current) +" " +str(i))
+        # print(adjMatrix[current][i])
+        # print(closed)
         if (adjMatrix[current][i] == 1 and find(closed,i) == -1):
+          # print("Yes")
           gcost = gcostParent + distanceInMeter(listCoor[current][0],listCoor[current][1], listCoor[i][0], listCoor[i][1])
           hcost = distanceInMeter(listCoor[i][0],listCoor[i][1],listCoor[idx2][0],listCoor[idx2][1])
           if ((queue.isMember(i) and queue.getFnKey(i) > gcost+hcost) or not queue.isMember(i)):
