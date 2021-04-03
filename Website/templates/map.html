@@ -23,7 +23,7 @@
             <meta name="viewport" content="width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             <style>
-                #map_61f37b74db2e45f8a10f8df80707d076 {
+                #map_f65c184cfeb54d06b3519510dea69204 {
                     position: relative;
                     width: 100.0%;
                     height: 100.0%;
@@ -35,13 +35,13 @@
 </head>
 <body>    
     
-            <div class="folium-map" id="map_61f37b74db2e45f8a10f8df80707d076" ></div>
+            <div class="folium-map" id="map_f65c184cfeb54d06b3519510dea69204" ></div>
         
 </body>
 <script>    
     
-            var map_61f37b74db2e45f8a10f8df80707d076 = L.map(
-                "map_61f37b74db2e45f8a10f8df80707d076",
+            var map_f65c184cfeb54d06b3519510dea69204 = L.map(
+                "map_f65c184cfeb54d06b3519510dea69204",
                 {
                     center: [-6.887221, 107.611479],
                     crs: L.CRS.EPSG3857,
@@ -55,37 +55,37 @@
 
         
     
-            var tile_layer_f409764758fe426eb0353a78c0c847f1 = L.tileLayer(
+            var tile_layer_2b580b5204c34712846e0a2498188144 = L.tileLayer(
                 "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png",
                 {"attribution": "\u0026copy; \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"http://cartodb.com/attributions\"\u003eCartoDB\u003c/a\u003e, CartoDB \u003ca href =\"http://cartodb.com/attributions\"\u003eattributions\u003c/a\u003e", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
-            ).addTo(map_61f37b74db2e45f8a10f8df80707d076);
+            ).addTo(map_f65c184cfeb54d06b3519510dea69204);
         
     
-            var feature_group_ede477b96f3a41fbb850fa1765ada350 = L.featureGroup(
+            var feature_group_963522bf86304881842d60ad7c25b539 = L.featureGroup(
                 {}
-            ).addTo(map_61f37b74db2e45f8a10f8df80707d076);
+            ).addTo(map_f65c184cfeb54d06b3519510dea69204);
         
     
-            var poly_line_f8e4c5e5944641db9b76db94914ef9b3 = L.polyline(
+            var poly_line_84b3726f33b649ecaa39f5f21660723e = L.polyline(
                 [[-6.887221, 107.611479], [-6.884972, 107.611512]],
                 {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 10}
-            ).addTo(feature_group_ede477b96f3a41fbb850fa1765ada350);
+            ).addTo(feature_group_963522bf86304881842d60ad7c25b539);
         
     
-        var popup_870ba0cf1bbd46a69a3ead8b17cbea1d = L.popup({"maxWidth": "100%"});
+        var popup_230c7f9d55474b70a6be1fc9456302db = L.popup({"maxWidth": "100%"});
 
         
-            var html_0871b40b68b346e9aab0962cd63147d7 = $(`<div id="html_0871b40b68b346e9aab0962cd63147d7" style="width: 100.0%; height: 100.0%;"><b>Path of Place 1</b></div>`)[0];
-            popup_870ba0cf1bbd46a69a3ead8b17cbea1d.setContent(html_0871b40b68b346e9aab0962cd63147d7);
+            var html_897ea76e62c94c14b6e503258c385401 = $(`<div id="html_897ea76e62c94c14b6e503258c385401" style="width: 100.0%; height: 100.0%;"><b>Path of Place 1</b></div>`)[0];
+            popup_230c7f9d55474b70a6be1fc9456302db.setContent(html_897ea76e62c94c14b6e503258c385401);
         
 
-        poly_line_f8e4c5e5944641db9b76db94914ef9b3.bindPopup(popup_870ba0cf1bbd46a69a3ead8b17cbea1d)
+        poly_line_84b3726f33b649ecaa39f5f21660723e.bindPopup(popup_230c7f9d55474b70a6be1fc9456302db)
         ;
 
         
     
     
-            poly_line_f8e4c5e5944641db9b76db94914ef9b3.bindTooltip(
+            poly_line_84b3726f33b649ecaa39f5f21660723e.bindTooltip(
                 `<div>
                      Place 1
                  </div>`,
@@ -93,18 +93,18 @@
             );
         
     
-            var layer_control_4f804bb0ff7a4240800da04b353704bb = {
+            var layer_control_8d78a92323394401b14ad49427dfe569 = {
                 base_layers : {
-                    "cartodbpositron" : tile_layer_f409764758fe426eb0353a78c0c847f1,
+                    "cartodbpositron" : tile_layer_2b580b5204c34712846e0a2498188144,
                 },
                 overlays :  {
-                    "Place 1" : feature_group_ede477b96f3a41fbb850fa1765ada350,
+                    "Place 1" : feature_group_963522bf86304881842d60ad7c25b539,
                 },
             };
             L.control.layers(
-                layer_control_4f804bb0ff7a4240800da04b353704bb.base_layers,
-                layer_control_4f804bb0ff7a4240800da04b353704bb.overlays,
+                layer_control_8d78a92323394401b14ad49427dfe569.base_layers,
+                layer_control_8d78a92323394401b14ad49427dfe569.overlays,
                 {"autoZIndex": true, "collapsed": true, "position": "topright"}
-            ).addTo(map_61f37b74db2e45f8a10f8df80707d076);
+            ).addTo(map_f65c184cfeb54d06b3519510dea69204);
         
 </script>
