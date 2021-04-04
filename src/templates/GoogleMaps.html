@@ -39,19 +39,26 @@
     <!-- Navbar -->
 
     <!-- Alert-->
-    <div class="container">
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                {% for message in messages %}
-                    {{ message }}
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
+        
 
-    </div>
     <!-- Visualisasi Peta-->
+    
     <section id = "Home">
-        <div class="row text-center mb-3 mt-3">>
+        <div class="flash mt-n5">
+            {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            
+                            <div class="alert alert-warning alert-dismissible fade show " role="alert">
+                                <span>{{ message }}</span>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+            {% endwith %}
+        </div>
+        
+        <div class="row text-center  mt-3">>
             <div class="row justify-content-center fs-4 text-center">
                 <div class="col-md-6">
                     <div class="container2">
@@ -83,10 +90,10 @@
                                         <div class="input-group mb-4">
                                             <input class="btn btn-outline-primary" type="submit" name = "pilihkota" value = "Pilih Kota"></input>
                                             <select class="form-select" name="comp_select" id="inputGroupSelect01">
-                                                <option selected>Choose...</option>
-                                                <option value="1" name = "city">Bandung</option>
-                                                <option value="2" name = "city">Surabaya</option>
-                                                <option value="3" name = "city">Kebumen</option>
+                                                <option value="1" name = "city">Choose..</option>
+                                                <option value="2" name = "city">Bandung</option>
+                                                <option value="3" name = "city">Surabaya</option>
+                                                <option value="4" name = "city">Kebumen</option>
                                             </select>
                                             
                                         </div>

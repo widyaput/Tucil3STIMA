@@ -29,16 +29,26 @@ def test():
     listCoor = []
     listJalan = []
     if (request.form.get("pilihkota")):
-        if (pilihankota == 1) :
+        if (pilihankota == 2) :
             adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("Alunalun.txt")
-        elif (pilihankota == 2) :
-            adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("graf.txt")
         elif (pilihankota == 3) :
+            adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("graf.txt")
+        elif (pilihankota == 4) :
             adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("itb.txt")
+        
+        
+        if request.method == 'POST':
+            if (pilihankota == 1):
+                fig5=Figure(height=550,width=750)
+                m5=folium.Map(location=[-6.920817, 107.604100],tiles='cartodbpositron',zoom_start=17)
+                fig5.add_child(m5)
+                folium.LayerControl().add_to(m5)
+                m5.save('templates/map.html')
+                flash('Masukkan Map Kota Anda', "info")
+                return render_template('GoogleMaps.html')
         fig5=Figure(height=550,width=750)
         m5=folium.Map(location=[listCoor[0][0],listCoor[0][1]],tiles='cartodbpositron',zoom_start=17)
         fig5.add_child(m5)
-        
         f1=folium.FeatureGroup("Jalan Asli")
         for i in range(len(listCoor)-1):
             
@@ -56,26 +66,36 @@ def test():
         m5.save('templates/map.html')
     
     if (request.form.get("search")):
-        if (pilihankota == 1) :
+        if (pilihankota == 2) :
             adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("Alunalun.txt")
             path, isNodeFound, isPathFound = main.main(adjMatrix,listNode,listCoor,firstloc,endloc)
-        elif (pilihankota == 2) :
+        elif (pilihankota == 3) :
             adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("graf.txt")
             path, isNodeFound, isPathFound = main.main(adjMatrix,listNode,listCoor,firstloc,endloc)
-        elif (pilihankota == 3) :
+        elif (pilihankota == 4) :
             adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("itb.txt")
             path, isNodeFound, isPathFound = main.main(adjMatrix,listNode,listCoor,firstloc,endloc)
-        fig5=Figure(height=550,width=750)
-        m5=folium.Map(location=[listCoor[0][0],listCoor[0][1]],tiles='cartodbpositron',zoom_start=17)
-        fig5.add_child(m5)
+        
         if request.method == 'POST':
-            if (not isNodeFound): #cek flag nodefound
-                flash('You were successfully logged in')
+            if (pilihankota == 1):
+                fig5=Figure(height=550,width=750)
+                m5=folium.Map(location=[-6.920817, 107.604100],tiles='cartodbpositron',zoom_start=17)
+                fig5.add_child(m5)
+                folium.LayerControl().add_to(m5)
+                m5.save('templates/map.html')
+                flash('Masukkan Map Kota Anda', "info")
+                return render_template('GoogleMaps.html')
+            
+            elif (not isNodeFound): #cek flag nodefound
+                flash('Tidak ditemukan lokasi yang sesuai', "info")
                 return render_template('GoogleMaps.html')
             elif (not isPathFound):
-                flash('You were successfully logged in')
-                return render_template('GoogleMaps.html')
+                flash('Tidak ditemukan jalan menuju lokasi tujuan')
+                return render_template('GoogleMaps.html', "info")
             else:
+                fig5=Figure(height=550,width=750)
+                m5=folium.Map(location=[listCoor[0][0],listCoor[0][1]],tiles='cartodbpositron',zoom_start=17)
+                fig5.add_child(m5)
                 f1=folium.FeatureGroup("Jalan Asli")
                 for i in range(len(listCoor)-1):
                     
