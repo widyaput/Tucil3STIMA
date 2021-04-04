@@ -55,7 +55,7 @@ def distanceInMeter(lat, lng, lat0, lng0):
   return r*c 
 
 def bacaFile(namaFile):
-  #ini buat baca grafnya
+      #ini buat baca grafnya
   #yang direturn : adjMatrix, listNode, listCoor, status
   #status nandain berhasil buka atau gak
   #walau kayanya nanti maneh setting biar selalu berhasil hehe
