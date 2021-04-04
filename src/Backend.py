@@ -19,13 +19,7 @@ def index():
             if (adjMatrix[i][j] != 0):
                 place1 = [[listCoor[i][0],listCoor[i][1]],[listCoor[j][0],listCoor[j][1]]]
                 line_1=folium.vector_layers.PolyLine(place1,popup='<b>Path of Place 1</b>',tooltip='Place 1',color='blue',weight=10).add_to(f1)
-    
 
-
-    
-    
-
-    
     f1.add_to(m5)
     folium.LayerControl().add_to(m5)
     m5.save('templates/map.html')
