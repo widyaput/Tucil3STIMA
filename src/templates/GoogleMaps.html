@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}"/>
+    <title>Google Maps</title>
+  </head>
+  <body onload="initialize()" >
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="file:///C:/Users/M.%20Fahmi%20Alamsyah/Documents/GitHub/Learn-Website/HTML/My%20Portofolio.html#Projects">Projects</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#Home">Home</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="#About">About</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="#Contact">Credits</a>
+                </li>
+            </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Navbar -->
+
+    <!-- Visualisasi Peta-->
+    <section id = "Home">
+        <div class="row text-center mb-3 mt-3">>
+            <div class="row justify-content-center fs-4 text-center">
+                <div class="col-md-6">
+                    <div class="container2">
+                        <iframe class="map", src="/map" width="600" height="600"></iframe>
+                    </div>
+                </div>
+                <div class="col-md-6 mt-5">
+                    <h3>
+                        Ayo Cari Jalan Terdekat Menuju Tujuan Anda!
+                    </h3>
+
+                    <div class="forminput">
+                        <form name = "passdata" action="/register" method = "post" class="justify-content-center">
+                            <div class="col-xl-8 col-lg-6 col-md-8 mb-4 col-sm-10 mx-auto text-center form p-1 mt-5">
+                                <label class="sr-only">Lokasi Anda</label>
+                                <input type="text" name = "floc" class="form-control" >
+                            </div>
+                            <div class="col-xl-8 col-lg-6 col-md-8 mb-4 col-sm-10 mx-auto text-center form p-1">
+                                <label class="sr-only">Lokasi Tujuan</label>
+                                <input type="text" name = "eloc" class="form-control" >
+                            </div>
+
+
+                        <div class="container">
+                                <div class="row text-center mb-3">
+                                    <div class="row justify-content-center fs-4 text-center">
+                                        <div class="col-sm-6 col-sm-offset-"><!--width is set by this div -->
+
+                                        <div class="input-group mb-4">
+                                            <label class="input-group-text bg-primary text-white" for="inputGroupSelect01">Pilih Kota</label>
+                                            <select class="form-select" name="comp_select" id="inputGroupSelect01">
+                                                <option value="1" name = "city">Bandung</option>
+                                                <option value="2" name = "city">Surabaya</option>
+                                                <option value="3" name = "city">Kebumen</option>
+                                            </select>
+                                            
+                                        </div>
+                                        
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="d-grid gap-1 col-5 mx-auto">
+                                                <input class="btn btn-outline-primary" type="submit" value = "Search">
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+
+                            
+                        </form>
+                    </div>
+                </div>
+            </div> 
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#e2edff" fill-opacity="1" d="M0,160L48,170.7C96,181,192,203,288,186.7C384,171,480,117,576,133.3C672,149,768,235,864,266.7C960,299,1056,277,1152,250.7C1248,224,1344,192,1392,176L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>   
+        </div>
+    </section>
+    <!-- Visualisasi Peta-->
+
+    <section id = "About">
+        <div class="container3">
+            <div class="row text-center mb-3">
+                <div class="col mb-4">
+                    <h2>
+                        About
+                    </h2>
+                </div>
+                <div class="row justify-content-center fs-4 text-center">
+                    <div class="col-md-6">
+                        <p>
+                            Aplikasi ini adalah aplikasi yang memanfaatkan algoritma A* Anjing! Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        </p>
+                    </div>
+                    
+                </div>
+                
+            </div>
+            </div>
+            
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#FFFF" fill-opacity="1" d="M0,192L48,176C96,160,192,128,288,101.3C384,75,480,53,576,64C672,75,768,117,864,122.7C960,128,1056,96,1152,106.7C1248,117,1344,171,1392,197.3L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
+    </section>
+
+    <!-- Contact-->
+    <section id = "Contact">
+        <div class="container3">
+            <div class="row text-center mb-3">
+                <div class="col mb-4">
+                    <h2>
+                        Contact
+                    </h2>
+                </div>
+                <div class="row justify-content-center fs-4 text-center">
+                    <div class="col-md-6">
+                        <img src="static/picture.jpg" alt="Muhammad Fahmi Alamsyah" width="300" class = "rounded-circle img-thumbnail mb-3">
+                        <h3 ><b>Muhammad Fahmi Alamsyah</b></h3>
+                        <h4>Frontend</h4>
+                    </div>
+                    <div class="col-md-6">
+                        <img src="static/wiwid.jpg" alt="Widya Anugrah Putra" width="300" class = "rounded-circle img-thumbnail mb-3">
+                        <h3 ><b>Widya Anugrah Putra</b></h3>
+                        <h4>Backend</h4>
+                    </div>
+                    
+                </div>
+                
+            </div>
+            </div>
+            
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#0d6efd" fill-opacity="1" d="M0,160L34.3,165.3C68.6,171,137,181,206,154.7C274.3,128,343,64,411,74.7C480,85,549,171,617,176C685.7,181,754,107,823,96C891.4,85,960,139,1029,181.3C1097.1,224,1166,256,1234,240C1302.9,224,1371,160,1406,128L1440,96L1440,320L1405.7,320C1371.4,320,1303,320,1234,320C1165.7,320,1097,320,1029,320C960,320,891,320,823,320C754.3,320,686,320,617,320C548.6,320,480,320,411,320C342.9,320,274,320,206,320C137.1,320,69,320,34,320L0,320Z"></path></svg>
+    </section>
+    <!-- Contact-->
+
+    <!-- Footer-->
+        <div class="footer bg-primary text-white text-center">
+            <div class="footer">
+                <h5>Created by <a href="https://www.instagram.com/tararahuuw/" class = "text-white fw-bold">Muhammad Fahmi Alamsyah</a></h5>
+            </div> 
+        </div>
+    <!-- Footer-->
+
+    <p>{{kota}} {{firstloc}} {{endloc}}</p>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    
+  </body>
+</html>

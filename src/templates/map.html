@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<head>    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_e155a385e5044a7db5bd77a3cb7c9787 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+            </style>
+        
+</head>
+<body>    
+    
+            <div class="folium-map" id="map_e155a385e5044a7db5bd77a3cb7c9787" ></div>
+        
+</body>
+<script>    
+    
+            var map_e155a385e5044a7db5bd77a3cb7c9787 = L.map(
+                "map_e155a385e5044a7db5bd77a3cb7c9787",
+                {
+                    center: [-6.920817, 107.6041],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 17,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_f283b966e2f041f5b7a508296bd9bd14 = L.tileLayer(
+                "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"http://cartodb.com/attributions\"\u003eCartoDB\u003c/a\u003e, CartoDB \u003ca href =\"http://cartodb.com/attributions\"\u003eattributions\u003c/a\u003e", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_e155a385e5044a7db5bd77a3cb7c9787);
+        
+    
+            var feature_group_795c8ee4367f48f19e27de13a0e2cc4e = L.featureGroup(
+                {}
+            ).addTo(map_e155a385e5044a7db5bd77a3cb7c9787);
+        
+    
+            var poly_line_ae33cefc3098438ebedfa451e59bfd22 = L.polyline(
+                [[-6.920817, 107.6041], [-6.920893, 107.605089]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 10}
+            ).addTo(feature_group_795c8ee4367f48f19e27de13a0e2cc4e);
+        
+    
+        var popup_8c6815ac63cb4b6ea1001d8b49948bf3 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_ec7f86df439a4009a57d4c7af2f90fce = $(`<div id="html_ec7f86df439a4009a57d4c7af2f90fce" style="width: 100.0%; height: 100.0%;"><b>Path of Place 1</b></div>`)[0];
+            popup_8c6815ac63cb4b6ea1001d8b49948bf3.setContent(html_ec7f86df439a4009a57d4c7af2f90fce);
+        
+
+        poly_line_ae33cefc3098438ebedfa451e59bfd22.bindPopup(popup_8c6815ac63cb4b6ea1001d8b49948bf3)
+        ;
+
+        
+    
+    
+            poly_line_ae33cefc3098438ebedfa451e59bfd22.bindTooltip(
+                `<div>
+                     Place 1
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var poly_line_dc84ba25bdb04cc5863a84570c4e5596 = L.polyline(
+                [[-6.920817, 107.6041], [-6.922083, 107.604024]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 10}
+            ).addTo(feature_group_795c8ee4367f48f19e27de13a0e2cc4e);
+        
+    
+        var popup_c2a099c1a3944fa682d24acd2e0b6316 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_743556fe3ee846dda14d4e70ac2629a5 = $(`<div id="html_743556fe3ee846dda14d4e70ac2629a5" style="width: 100.0%; height: 100.0%;"><b>Path of Place 1</b></div>`)[0];
+            popup_c2a099c1a3944fa682d24acd2e0b6316.setContent(html_743556fe3ee846dda14d4e70ac2629a5);
+        
+
+        poly_line_dc84ba25bdb04cc5863a84570c4e5596.bindPopup(popup_c2a099c1a3944fa682d24acd2e0b6316)
+        ;
+
+        
+    
+    
+            poly_line_dc84ba25bdb04cc5863a84570c4e5596.bindTooltip(
+                `<div>
+                     Place 1
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var poly_line_7f4fc36414e54f3cb20d7d6ba33641e5 = L.polyline(
+                [[-6.920893, 107.605089], [-6.921052, 107.606472]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 10}
+            ).addTo(feature_group_795c8ee4367f48f19e27de13a0e2cc4e);
+        
+    
+        var popup_8a23a5218aba4a8882a2d369a30882ec = L.popup({"maxWidth": "100%"});
+
+        
+            var html_05aa04b5dea04abd931d2526d6ecd824 = $(`<div id="html_05aa04b5dea04abd931d2526d6ecd824" style="width: 100.0%; height: 100.0%;"><b>Path of Place 1</b></div>`)[0];
+            popup_8a23a5218aba4a8882a2d369a30882ec.setContent(html_05aa04b5dea04abd931d2526d6ecd824);
+        
+
+        poly_line_7f4fc36414e54f3cb20d7d6ba33641e5.bindPopup(popup_8a23a5218aba4a8882a2d369a30882ec)
+        ;
+
+        
+    
+    
+            poly_line_7f4fc36414e54f3cb20d7d6ba33641e5.bindTooltip(
+                `<div>
+                     Place 1
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var poly_line_058d406aa97c46ae82e337c6baa0dddd = L.polyline(
+                [[-6.921052, 107.606472], [-6.921228, 107.60769]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 10}
+            ).addTo(feature_group_795c8ee4367f48f19e27de13a0e2cc4e);
+        
+    
+        var popup_ec22cd5735f4474d9711710d69029d46 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_c1d29cb04b5946c9af231703edeb021c = $(`<div id="html_c1d29cb04b5946c9af231703edeb021c" style="width: 100.0%; height: 100.0%;"><b>Path of Place 1</b></div>`)[0];
+            popup_ec22cd5735f4474d9711710d69029d46.setContent(html_c1d29cb04b5946c9af231703edeb021c);
+        
+
+        poly_line_058d406aa97c46ae82e337c6baa0dddd.bindPopup(popup_ec22cd5735f4474d9711710d69029d46)
+        ;
+
+        
+    
+    
+            poly_line_058d406aa97c46ae82e337c6baa0dddd.bindTooltip(
+                `<div>
+                     Place 1
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var poly_line_f17602d75b9543d994b7faff4c0f78ad = L.polyline(
+                [[-6.921228, 107.60769], [-6.922551, 107.60752]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 10}
+            ).addTo(feature_group_795c8ee4367f48f19e27de13a0e2cc4e);
+        
+    
+        var popup_a6db5bc8906442a2a7769c405d01038c = L.popup({"maxWidth": "100%"});
+
+        
+            var html_618539f0ca1f45b6b0d386a6a61467a6 = $(`<div id="html_618539f0ca1f45b6b0d386a6a61467a6" style="width: 100.0%; height: 100.0%;"><b>Path of Place 1</b></div>`)[0];
+            popup_a6db5bc8906442a2a7769c405d01038c.setContent(html_618539f0ca1f45b6b0d386a6a61467a6);
+        
+
+        poly_line_f17602d75b9543d994b7faff4c0f78ad.bindPopup(popup_a6db5bc8906442a2a7769c405d01038c)
+        ;
+
+        
+    
+    
+            poly_line_f17602d75b9543d994b7faff4c0f78ad.bindTooltip(
+                `<div>
+                     Place 1
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var poly_line_ae0fe2dd0321491da0ea063a382eff4b = L.polyline(
+                [[-6.922083, 107.604024], [-6.922383, 107.606429]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 10}
+            ).addTo(feature_group_795c8ee4367f48f19e27de13a0e2cc4e);
+        
+    
+        var popup_89a0962717e8407cab4e5e0e75603fdd = L.popup({"maxWidth": "100%"});
+
+        
+            var html_2052a8d1761546ccab6396ab76c5a60e = $(`<div id="html_2052a8d1761546ccab6396ab76c5a60e" style="width: 100.0%; height: 100.0%;"><b>Path of Place 1</b></div>`)[0];
+            popup_89a0962717e8407cab4e5e0e75603fdd.setContent(html_2052a8d1761546ccab6396ab76c5a60e);
+        
+
+        poly_line_ae0fe2dd0321491da0ea063a382eff4b.bindPopup(popup_89a0962717e8407cab4e5e0e75603fdd)
+        ;
+
+        
+    
+    
+            poly_line_ae0fe2dd0321491da0ea063a382eff4b.bindTooltip(
+                `<div>
+                     Place 1
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var poly_line_391f5d92058e483b82ec2e8a7cc16d8c = L.polyline(
+                [[-6.922083, 107.604024], [-6.923107, 107.603929]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 10}
+            ).addTo(feature_group_795c8ee4367f48f19e27de13a0e2cc4e);
+        
+    
+        var popup_cbab9433b8314928a3eefb6361807bef = L.popup({"maxWidth": "100%"});
+
+        
+            var html_d52aaa6291ae46a78a19c1a1a2aa7c2c = $(`<div id="html_d52aaa6291ae46a78a19c1a1a2aa7c2c" style="width: 100.0%; height: 100.0%;"><b>Path of Place 1</b></div>`)[0];
+            popup_cbab9433b8314928a3eefb6361807bef.setContent(html_d52aaa6291ae46a78a19c1a1a2aa7c2c);
+        
+
+        poly_line_391f5d92058e483b82ec2e8a7cc16d8c.bindPopup(popup_cbab9433b8314928a3eefb6361807bef)
+        ;
+
+        
+    
+    
+            poly_line_391f5d92058e483b82ec2e8a7cc16d8c.bindTooltip(
+                `<div>
+                     Place 1
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var poly_line_0f121b362a834354ba22db1e8304d32d = L.polyline(
+                [[-6.922383, 107.606429], [-6.922521, 107.607099]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 10}
+            ).addTo(feature_group_795c8ee4367f48f19e27de13a0e2cc4e);
+        
+    
+        var popup_8a5342b4050241af9ccfc697b93d56f7 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_854614663ee24f5892f3c9883e9ab639 = $(`<div id="html_854614663ee24f5892f3c9883e9ab639" style="width: 100.0%; height: 100.0%;"><b>Path of Place 1</b></div>`)[0];
+            popup_8a5342b4050241af9ccfc697b93d56f7.setContent(html_854614663ee24f5892f3c9883e9ab639);
+        
+
+        poly_line_0f121b362a834354ba22db1e8304d32d.bindPopup(popup_8a5342b4050241af9ccfc697b93d56f7)
+        ;
+
+        
+    
+    
+            poly_line_0f121b362a834354ba22db1e8304d32d.bindTooltip(
+                `<div>
+                     Place 1
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var poly_line_8a340bf54c794b2db0729b760eb06de3 = L.polyline(
+                [[-6.922383, 107.606429], [-6.923423, 107.606288]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 10}
+            ).addTo(feature_group_795c8ee4367f48f19e27de13a0e2cc4e);
+        
+    
+        var popup_27d2dccf7f1b433e85c123c8dd1c7825 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_6882bf1579e5407dbaf8b474ad22e808 = $(`<div id="html_6882bf1579e5407dbaf8b474ad22e808" style="width: 100.0%; height: 100.0%;"><b>Path of Place 1</b></div>`)[0];
+            popup_27d2dccf7f1b433e85c123c8dd1c7825.setContent(html_6882bf1579e5407dbaf8b474ad22e808);
+        
+
+        poly_line_8a340bf54c794b2db0729b760eb06de3.bindPopup(popup_27d2dccf7f1b433e85c123c8dd1c7825)
+        ;
+
+        
+    
+    
+            poly_line_8a340bf54c794b2db0729b760eb06de3.bindTooltip(
+                `<div>
+                     Place 1
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var poly_line_5ab9f924c79a4fa2b045fd80b26a42fe = L.polyline(
+                [[-6.922521, 107.607099], [-6.922551, 107.60752]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 10}
+            ).addTo(feature_group_795c8ee4367f48f19e27de13a0e2cc4e);
+        
+    
+        var popup_2c85fbc5f3de4d0b8f137381895648f8 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_f8fcae08a57d4e3f8a8b5ad9f14f762d = $(`<div id="html_f8fcae08a57d4e3f8a8b5ad9f14f762d" style="width: 100.0%; height: 100.0%;"><b>Path of Place 1</b></div>`)[0];
+            popup_2c85fbc5f3de4d0b8f137381895648f8.setContent(html_f8fcae08a57d4e3f8a8b5ad9f14f762d);
+        
+
+        poly_line_5ab9f924c79a4fa2b045fd80b26a42fe.bindPopup(popup_2c85fbc5f3de4d0b8f137381895648f8)
+        ;
+
+        
+    
+    
+            poly_line_5ab9f924c79a4fa2b045fd80b26a42fe.bindTooltip(
+                `<div>
+                     Place 1
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var poly_line_a1a999d20f72475a922c5c5c8441bbb2 = L.polyline(
+                [[-6.923107, 107.603929], [-6.923423, 107.606288]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 10}
+            ).addTo(feature_group_795c8ee4367f48f19e27de13a0e2cc4e);
+        
+    
+        var popup_caece9dda9c64d739bd32f9ed66de8b7 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_022fb0c7c6534578acde99caea0a7ecf = $(`<div id="html_022fb0c7c6534578acde99caea0a7ecf" style="width: 100.0%; height: 100.0%;"><b>Path of Place 1</b></div>`)[0];
+            popup_caece9dda9c64d739bd32f9ed66de8b7.setContent(html_022fb0c7c6534578acde99caea0a7ecf);
+        
+
+        poly_line_a1a999d20f72475a922c5c5c8441bbb2.bindPopup(popup_caece9dda9c64d739bd32f9ed66de8b7)
+        ;
+
+        
+    
+    
+            poly_line_a1a999d20f72475a922c5c5c8441bbb2.bindTooltip(
+                `<div>
+                     Place 1
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var layer_control_0dfd4aba230f400184b4d05efdff4f5b = {
+                base_layers : {
+                    "cartodbpositron" : tile_layer_f283b966e2f041f5b7a508296bd9bd14,
+                },
+                overlays :  {
+                    "Place 1" : feature_group_795c8ee4367f48f19e27de13a0e2cc4e,
+                },
+            };
+            L.control.layers(
+                layer_control_0dfd4aba230f400184b4d05efdff4f5b.base_layers,
+                layer_control_0dfd4aba230f400184b4d05efdff4f5b.overlays,
+                {"autoZIndex": true, "collapsed": true, "position": "topright"}
+            ).addTo(map_e155a385e5044a7db5bd77a3cb7c9787);
+        
+</script>
