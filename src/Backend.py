@@ -35,8 +35,7 @@ def test():
             adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("graf.txt")
         elif (pilihankota == 4) :
             adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("itb.txt")
-        
-        
+    
         if request.method == 'POST':
             if (pilihankota == 1):
                 fig5=Figure(height=550,width=750)
@@ -47,7 +46,8 @@ def test():
                 flash('Masukkan Map Kota Anda', "info")
                 return render_template('GoogleMaps.html')
         fig5=Figure(height=550,width=750)
-        m5=folium.Map(location=[listCoor[0][0],listCoor[0][1]],tiles='cartodbpositron',zoom_start=17)
+        middle = main.middlePoint(listCoor)
+        m5=folium.Map(location=[middle[0],middle[1]],tiles='cartodbpositron',zoom_start=17)
         fig5.add_child(m5)
         f1=folium.FeatureGroup("Jalan Asli")
         for i in range(len(listCoor)-1):
