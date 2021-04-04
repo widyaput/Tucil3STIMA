@@ -1,9 +1,10 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request,flash,redirect
 import folium
 from branca.element import Figure
 import main
 
 app = Flask(__name__)
+app.secret_key = '_5#y2L"F4Q8z\n\xec]/'
 
 @app.route('/')
 def index():
@@ -26,6 +27,7 @@ def test():
     adjMatrix = [[]]
     listNode = []
     listCoor = []
+    listJalan = []
     if (request.form.get("pilihkota")):
         if (pilihankota == 1) :
             adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("Alunalun.txt")
@@ -43,11 +45,11 @@ def test():
             for j in range(i+1, len(listCoor)):
                 if (adjMatrix[i][j] != 0):
                     place1 = [[listCoor[i][0],listCoor[i][1]],[listCoor[j][0],listCoor[j][1]]]
-                    line_1=folium.vector_layers.PolyLine(place1,popup='<b>Path of Jalan Asli</b>',tooltip='Jalan Asli',color='red',weight=10).add_to(f1)
-        
+                    line_1=folium.vector_layers.PolyLine(place1,color='red',weight=10).add_to(f1)
+
         #bikin node
         for i in range(len(listCoor)):
-            folium.Marker(listCoor[i],popup=listNode[i],tooltip='<strong>Click here to see Popup</strong>',icon=folium.Icon(color='red',icon='none')).add_to(m5)
+            folium.Marker(listCoor[i],popup=listNode[i],tooltip='<strong>Click here to see Popup</strong>',icon=folium.Icon(color='blue',icon='none')).add_to(m5)
         
         f1.add_to(m5) 
         folium.LayerControl().add_to(m5)
@@ -56,29 +58,49 @@ def test():
     if (request.form.get("search")):
         if (pilihankota == 1) :
             adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("Alunalun.txt")
+            path, isNodeFound, isPathFound = main.main(adjMatrix,listNode,listCoor,firstloc,endloc)
         elif (pilihankota == 2) :
             adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("graf.txt")
+            path, isNodeFound, isPathFound = main.main(adjMatrix,listNode,listCoor,firstloc,endloc)
         elif (pilihankota == 3) :
             adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("itb.txt")
+            path, isNodeFound, isPathFound = main.main(adjMatrix,listNode,listCoor,firstloc,endloc)
         fig5=Figure(height=550,width=750)
         m5=folium.Map(location=[listCoor[0][0],listCoor[0][1]],tiles='cartodbpositron',zoom_start=17)
         fig5.add_child(m5)
-        
-        f1=folium.FeatureGroup("Jalan Asli")
-        for i in range(len(listCoor)-1):
-            
-            for j in range(i+1, len(listCoor)):
-                if (adjMatrix[i][j] != 0):
-                    place1 = [[listCoor[i][0],listCoor[i][1]],[listCoor[j][0],listCoor[j][1]]]
-                    line_1=folium.vector_layers.PolyLine(place1,popup='<b>Path of Jalan Asli</b>',tooltip='Jalan Asli',color='blue',weight=10).add_to(f1)
-        
-        #bikin node
-        for i in range(len(listCoor)):
-            folium.Marker(listCoor[i],popup=listNode[i],tooltip='<strong>Click here to see Popup</strong>',icon=folium.Icon(color='red',icon='none')).add_to(m5)
-        
-        f1.add_to(m5) 
-        folium.LayerControl().add_to(m5)
-        m5.save('templates/map.html')
+        if request.method == 'POST':
+            if (not isNodeFound): #cek flag nodefound
+                flash('You were successfully logged in')
+                return render_template('GoogleMaps.html')
+            elif (not isPathFound):
+                flash('You were successfully logged in')
+                return render_template('GoogleMaps.html')
+            else:
+                f1=folium.FeatureGroup("Jalan Asli")
+                for i in range(len(listCoor)-1):
+                    
+                    for j in range(i+1, len(listCoor)):
+                        if (adjMatrix[i][j] != 0):
+                            place1 = [[listCoor[i][0],listCoor[i][1]],[listCoor[j][0],listCoor[j][1]]]
+                            line_1=folium.vector_layers.PolyLine(place1,color='red',weight=10).add_to(f1)
+                
+                for i in range(len(path)-1):
+                    listJalan.append([listCoor[path[i]],listCoor[path[i+1]]])
+                
+                jarakpath = "Jaraknya " + str(main.hitungJarakPath(adjMatrix,path,listCoor)) + " meter"
+                for i in range(len(listJalan)-1):
+                    line_1=folium.vector_layers.PolyLine(listJalan,popup=jarakpath,tooltip=jarakpath,color='blue',weight=10).add_to(f1)
+                
+                #bikin node
+                for i in range(len(listCoor)):
+                    folium.Marker(listCoor[i],popup=listNode[i],tooltip='<strong>Click here to see Popup</strong>',icon=folium.Icon(color='red',icon='none')).add_to(m5)
+                
+                for i in range(len(path)):
+                    folium.Marker(listCoor[path[i]],popup=listNode[path[i]],tooltip='<strong>Click here to see Popup</strong>',icon=folium.Icon(color='green',icon='none')).add_to(m5)
+                    
+                f1.add_to(m5) 
+                folium.LayerControl().add_to(m5)
+                m5.save('templates/map.html')
 
     #kalau sampai sini aman
     #bisa mulai gambar
@@ -90,7 +112,7 @@ def test():
     #ini buat nampilin pake panah2 gitu jadi maneh gk usah liat
     #nah kalau mau hitung jaraknya bisa pake ini hitungJarakPath, jaraknya dalam meter
     
-    return render_template('GoogleMaps.html', kota = pilihankota, firstloc = firstloc, endloc= endloc)
+    return render_template('GoogleMaps.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
