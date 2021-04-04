@@ -110,6 +110,14 @@ def isWeightedGraf(adjMatrix):
         return True
   return False
 
+def middlePoint(listCoor):
+  lat = 0
+  long = 0
+  for i in range(len(listCoor)):
+    lat += listCoor[i][0]
+    long += listCoor[i][1]
+  return (lat/len(listCoor),long/len(listCoor))
+
 def hitungJarakPath(adjMatrix,path,listCoor):
   jarak = 0
   if (isWeightedGraf(adjMatrix)):

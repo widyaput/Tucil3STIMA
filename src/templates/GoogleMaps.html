@@ -38,6 +38,17 @@
     </nav>
     <!-- Navbar -->
 
+    <!-- Alert-->
+    <div class="container">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+    </div>
     <!-- Visualisasi Peta-->
     <section id = "Home">
         <div class="row text-center mb-3 mt-3">>
@@ -56,7 +67,7 @@
                         <form name = "passdata" action="/register" method = "post" class="justify-content-center">
                             <div class="col-xl-8 col-lg-6 col-md-8 mb-4 col-sm-10 mx-auto text-center form p-1 mt-5">
                                 <label class="sr-only">Lokasi Anda</label>
-                                <input type="text" name = "floc" class="form-control" >
+                                <input type="text" name = "floc" class="form-control">
                             </div>
                             <div class="col-xl-8 col-lg-6 col-md-8 mb-4 col-sm-10 mx-auto text-center form p-1">
                                 <label class="sr-only">Lokasi Tujuan</label>
