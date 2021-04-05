@@ -30,11 +30,20 @@ def test():
     listJalan = []
     if (request.form.get("pilihkota")):
         if (pilihankota == 2) :
-            adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("Alunalun.txt")
+            adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("ITB.txt")
         elif (pilihankota == 3) :
-            adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("graf.txt")
+            adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("Alunalun.txt")
         elif (pilihankota == 4) :
-            adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("itb.txt")
+            adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("buahbatu.txt")
+        elif (pilihankota == 5) :
+            adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("Kebumen.txt")
+            path, isNodeFound, isPathFound = main.main(adjMatrix,listNode,listCoor,firstloc,endloc)
+        elif (pilihankota == 6) :
+            adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("graf.txt")
+            path, isNodeFound, isPathFound = main.main(adjMatrix,listNode,listCoor,firstloc,endloc)
+        elif (pilihankota == 7) :
+            adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("Kebumen.txt")
+            path, isNodeFound, isPathFound = main.main(adjMatrix,listNode,listCoor,firstloc,endloc)
     
         if request.method == 'POST':
             if (pilihankota == 1):
@@ -67,13 +76,22 @@ def test():
     
     if (request.form.get("search")):
         if (pilihankota == 2) :
-            adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("Alunalun.txt")
+            adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("ITB.txt")
             path, isNodeFound, isPathFound = main.main(adjMatrix,listNode,listCoor,firstloc,endloc)
         elif (pilihankota == 3) :
-            adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("graf.txt")
+            adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("Alunalun.txt")
             path, isNodeFound, isPathFound = main.main(adjMatrix,listNode,listCoor,firstloc,endloc)
         elif (pilihankota == 4) :
-            adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("itb.txt")
+            adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("buahbatu.txt")
+            path, isNodeFound, isPathFound = main.main(adjMatrix,listNode,listCoor,firstloc,endloc)
+        elif (pilihankota == 5) :
+            adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("Kebumen.txt")
+            path, isNodeFound, isPathFound = main.main(adjMatrix,listNode,listCoor,firstloc,endloc)
+        elif (pilihankota == 6) :
+            adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("graf.txt")
+            path, isNodeFound, isPathFound = main.main(adjMatrix,listNode,listCoor,firstloc,endloc)
+        elif (pilihankota == 7) :
+            adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("Kebumen.txt")
             path, isNodeFound, isPathFound = main.main(adjMatrix,listNode,listCoor,firstloc,endloc)
         
         if request.method == 'POST':
@@ -83,18 +101,31 @@ def test():
                 fig5.add_child(m5)
                 folium.LayerControl().add_to(m5)
                 m5.save('templates/map.html')
-                flash('Masukkan Map Kota Anda', "info")
+                flash('Masukkan Map Kota Anda')
                 return render_template('GoogleMaps.html')
             
             elif (not isNodeFound): #cek flag nodefound
-                flash('Tidak ditemukan lokasi yang sesuai', "info")
+                fig5=Figure(height=550,width=750)
+                m5=folium.Map(location=[-6.920817, 107.604100],tiles='cartodbpositron',zoom_start=17)
+                fig5.add_child(m5)
+                folium.LayerControl().add_to(m5)
+                m5.save('templates/map.html')
+                flash('Tidak ditemukan lokasi yang sesuai')
                 return render_template('GoogleMaps.html')
             elif (not isPathFound):
-                flash('Tidak ditemukan jalan menuju lokasi tujuan')
-                return render_template('GoogleMaps.html', "info")
-            else:
                 fig5=Figure(height=550,width=750)
-                m5=folium.Map(location=[listCoor[0][0],listCoor[0][1]],tiles='cartodbpositron',zoom_start=17)
+                m5=folium.Map(location=[-6.920817, 107.604100],tiles='cartodbpositron',zoom_start=17)
+                fig5.add_child(m5)
+                folium.LayerControl().add_to(m5)
+                m5.save('templates/map.html')
+                flash('Tidak ditemukan jalan menuju lokasi tujuan')
+                return render_template('GoogleMaps.html')
+            else:
+                for i in range(len(path)-1):
+                    listJalan.append([listCoor[path[i]],listCoor[path[i+1]]])
+                    
+                fig5=Figure(height=550,width=750)
+                m5=folium.Map(location=listJalan[0][0],tiles='cartodbpositron',zoom_start=17)
                 fig5.add_child(m5)
                 f1=folium.FeatureGroup("Jalan Asli")
                 for i in range(len(listCoor)-1):
@@ -104,8 +135,7 @@ def test():
                             place1 = [[listCoor[i][0],listCoor[i][1]],[listCoor[j][0],listCoor[j][1]]]
                             line_1=folium.vector_layers.PolyLine(place1,color='red',weight=10).add_to(f1)
                 
-                for i in range(len(path)-1):
-                    listJalan.append([listCoor[path[i]],listCoor[path[i+1]]])
+                
                 
                 jarakpath = "Jaraknya " + str(main.hitungJarakPath(adjMatrix,path,listCoor)) + " meter"
                 for i in range(len(listJalan)-1):
@@ -117,7 +147,7 @@ def test():
                 
                 for i in range(len(path)):
                     folium.Marker(listCoor[path[i]],popup=listNode[path[i]],tooltip='<strong>Click here to see Popup</strong>',icon=folium.Icon(color='green',icon='none')).add_to(m5)
-                    
+                
                 f1.add_to(m5) 
                 folium.LayerControl().add_to(m5)
                 m5.save('templates/map.html')
