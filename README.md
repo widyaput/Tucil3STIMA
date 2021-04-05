@@ -20,11 +20,11 @@ graf menyatakan jarak (m atau km) antar simpul. Jarak antar dua simpul dapat dih
 koordinat kedua simpul menggunakan rumus jarak Euclidean
 
 ## Screenshots
-![Example screenshot](../src/static/ss/picture1.jpg)
-![Example screenshot](../src/static/ss/picture2.jpg)
-![Example screenshot](../src/static/ss/picture3.jpg)
-![Example screenshot](../src/static/ss/picture4.jpg)
-![Example screenshot](../src/static/ss/picture5.jpg)
+![Example screenshot](./src/static/ss/picture1.jpg)
+![Example screenshot](./src/static/ss/picture2.jpg)
+![Example screenshot](./src/static/ss/picture3.jpg)
+![Example screenshot](./src/static/ss/picture4.jpg)
+![Example screenshot](./src/static/ss/picture5.jpg)
 
 ## Technologies
 * HTML 5
