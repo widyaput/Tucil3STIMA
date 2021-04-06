@@ -30,12 +30,14 @@ class PrioQueueMod(object):
         self.queue[idxPred+1] = self.queue[idxPred]
         self.queue[idxPred] = data
         idxPred -= 1
+  
   def delete(self):
     return self.queue.pop(0)
 
   def show(self):
     for i in range(len(self.queue)):
       print(str(self.queue[i][0]) + " dengan value g(n): " + str(self.queue[i][1]) + " dan value h(n) : " +str(self.queue[i][2]))
+  
   def getFnKey(self,idx):
     dummy = self.nthIndex(idx)
     if (dummy == -1):
@@ -131,6 +133,7 @@ def hitungJarakPath(adjMatrix,path,listCoor):
       jarak+= distanceInMeter(listCoor[path[current]][0],listCoor[path[current]][1], listCoor[path[current+1]][0],listCoor[path[current+1]][1])
       current += 1
   return jarak
+  
 def main(adjMatrix,listNode,listCoor,node1,node2):
   #ASUMSI : BACA FILE BERHASIL, SEHINGGA ADJMATRIX LISTNODE LISTCOOR TINGGAL DIPAKE
   #return path (isinya indeks-indeks node dari ListNode yang jadi path)

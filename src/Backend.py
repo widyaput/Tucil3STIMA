@@ -40,7 +40,7 @@ def test():
         elif (pilihankota == 6) :
             adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("graf.txt")
         elif (pilihankota == 7) :
-            adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("Kebumen.txt")
+            adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("tayu.txt")
     
         if request.method == 'POST':
             if (pilihankota == 1):
@@ -88,7 +88,7 @@ def test():
             adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("graf.txt")
             path, isNodeFound, isPathFound = main.main(adjMatrix,listNode,listCoor,firstloc,endloc)
         elif (pilihankota == 7) :
-            adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("Kebumen.txt")
+            adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("tayu.txt")
             path, isNodeFound, isPathFound = main.main(adjMatrix,listNode,listCoor,firstloc,endloc)
         
         if request.method == 'POST':
