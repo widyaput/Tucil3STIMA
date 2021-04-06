@@ -37,13 +37,10 @@ def test():
             adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("buahbatu.txt")
         elif (pilihankota == 5) :
             adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("Kebumen.txt")
-            path, isNodeFound, isPathFound = main.main(adjMatrix,listNode,listCoor,firstloc,endloc)
         elif (pilihankota == 6) :
             adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("graf.txt")
-            path, isNodeFound, isPathFound = main.main(adjMatrix,listNode,listCoor,firstloc,endloc)
         elif (pilihankota == 7) :
             adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("Kebumen.txt")
-            path, isNodeFound, isPathFound = main.main(adjMatrix,listNode,listCoor,firstloc,endloc)
     
         if request.method == 'POST':
             if (pilihankota == 1):
@@ -106,16 +103,36 @@ def test():
             
             elif (not isNodeFound): #cek flag nodefound
                 fig5=Figure(height=550,width=750)
-                m5=folium.Map(location=[-6.920817, 107.604100],tiles='cartodbpositron',zoom_start=17)
+                middle = main.middlePoint(listCoor)
+                m5=folium.Map(location=[middle[0], middle[1]],tiles='cartodbpositron',zoom_start=17)
                 fig5.add_child(m5)
+                f1=folium.FeatureGroup("Jalan Asli")
+                for i in range(len(listCoor)-1):
+                    for j in range(i+1, len(listCoor)):
+                        if (adjMatrix[i][j] != 0):
+                            place1 = [[listCoor[i][0],listCoor[i][1]],[listCoor[j][0],listCoor[j][1]]]
+                            line_1=folium.vector_layers.PolyLine(place1,color='red',weight=10).add_to(f1)
+                for i in range(len(listCoor)):
+                    folium.Marker(listCoor[i],popup=listNode[i],tooltip='<strong>Click here to see Popup</strong>',icon=folium.Icon(color='blue',icon='none')).add_to(m5)
+                f1.add_to(m5) 
                 folium.LayerControl().add_to(m5)
                 m5.save('templates/map.html')
                 flash('Tidak ditemukan lokasi yang sesuai')
                 return render_template('GoogleMaps.html')
             elif (not isPathFound):
                 fig5=Figure(height=550,width=750)
-                m5=folium.Map(location=[-6.920817, 107.604100],tiles='cartodbpositron',zoom_start=17)
+                middle = main.middlePoint(listCoor)
+                m5=folium.Map(location=[middle[0], middle[1]],tiles='cartodbpositron',zoom_start=17)
                 fig5.add_child(m5)
+                f1=folium.FeatureGroup("Jalan Asli")
+                for i in range(len(listCoor)-1):
+                    for j in range(i+1, len(listCoor)):
+                        if (adjMatrix[i][j] != 0):
+                            place1 = [[listCoor[i][0],listCoor[i][1]],[listCoor[j][0],listCoor[j][1]]]
+                            line_1=folium.vector_layers.PolyLine(place1,color='red',weight=10).add_to(f1)
+                for i in range(len(listCoor)):
+                    folium.Marker(listCoor[i],popup=listNode[i],tooltip='<strong>Click here to see Popup</strong>',icon=folium.Icon(color='blue',icon='none')).add_to(m5)
+                f1.add_to(m5) 
                 folium.LayerControl().add_to(m5)
                 m5.save('templates/map.html')
                 flash('Tidak ditemukan jalan menuju lokasi tujuan')
@@ -125,11 +142,11 @@ def test():
                     listJalan.append([listCoor[path[i]],listCoor[path[i+1]]])
                     
                 fig5=Figure(height=550,width=750)
-                m5=folium.Map(location=listJalan[0][0],tiles='cartodbpositron',zoom_start=17)
+                middle = main.middlePoint(listCoor)
+                m5=folium.Map(location=[middle[0],middle[1]],tiles='cartodbpositron',zoom_start=17)
                 fig5.add_child(m5)
                 f1=folium.FeatureGroup("Jalan Asli")
                 for i in range(len(listCoor)-1):
-                    
                     for j in range(i+1, len(listCoor)):
                         if (adjMatrix[i][j] != 0):
                             place1 = [[listCoor[i][0],listCoor[i][1]],[listCoor[j][0],listCoor[j][1]]]
@@ -138,12 +155,12 @@ def test():
                 
                 
                 jarakpath = "Jaraknya " + str(main.hitungJarakPath(adjMatrix,path,listCoor)) + " meter"
-                for i in range(len(listJalan)-1):
-                    line_1=folium.vector_layers.PolyLine(listJalan,popup=jarakpath,tooltip=jarakpath,color='blue',weight=10).add_to(f1)
+                for i in range(len(listJalan)):
+                    line_1=folium.vector_layers.PolyLine(listJalan[i],popup=jarakpath,tooltip=jarakpath,color='blue',weight=10).add_to(f1)
                 
                 #bikin node
                 for i in range(len(listCoor)):
-                    folium.Marker(listCoor[i],popup=listNode[i],tooltip='<strong>Click here to see Popup</strong>',icon=folium.Icon(color='red',icon='none')).add_to(m5)
+                    folium.Marker(listCoor[i],popup=listNode[i],tooltip='<strong>Click here to see Popup</strong>',icon=folium.Icon(color='blue',icon='none')).add_to(m5)
                 
                 for i in range(len(path)):
                     folium.Marker(listCoor[path[i]],popup=listNode[path[i]],tooltip='<strong>Click here to see Popup</strong>',icon=folium.Icon(color='green',icon='none')).add_to(m5)

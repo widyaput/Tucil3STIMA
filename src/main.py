@@ -60,7 +60,7 @@ def bacaFile(namaFile):
   #status nandain berhasil buka atau gak
   #walau kayanya nanti maneh setting biar selalu berhasil hehe
   try:
-    f =open('graf/'+ namaFile, 'r')
+    f =open('../test/'+ namaFile, 'r')
   except IOError:
     return [[]],[],[],False
   N = int(f.readline())
