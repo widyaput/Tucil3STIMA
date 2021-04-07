@@ -37,7 +37,8 @@ koordinat kedua simpul menggunakan rumus jarak Euclidean
 ```bash
 pip install flask
 ```
-atau dengan
+    atau dengan
+
 ```bash
 python3 -m pip install flask
 ```
@@ -45,7 +46,8 @@ python3 -m pip install flask
 ```bash
 pip install folium
 ```
-atau dengan
+    atau dengan
+
 ```bash
 python3 -m pip install folium
 ```
