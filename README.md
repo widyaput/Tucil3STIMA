@@ -30,18 +30,37 @@ koordinat kedua simpul menggunakan rumus jarak Euclidean
 * HTML 5
 * CSS
 * Boostrap 5
-* Python 3
+* Python 3 (minimal 3.8 version)
 
 ## Setup
-1. Lakukan 'pip install flask' di cmd
-2. Lakukan 'pip install folium' di cmd
-3. Jalankan 'Backend.py" di cmd
-4. copy link local yang tersedia di cmd pada browser
+1. Install Flask di terminal dengan mengetikkan
+```bash
+pip install flask
+```
+atau dengan
+```bash
+python3 -m pip install flask
+```
+2. Install Folium di terminal dengan mengetikkan
+```bash
+pip install folium
+```
+atau dengan
+```bash
+python3 -m pip install folium
+```
+
+3. Lakukan git clone repository ini dengan mengetikkan di terminal atau git bash
+```bash
+git clone https://github.com/widyaput/Tucil3STIMA.git
+```
 
 ## Code Examples
 Show examples of usage:
-- Pada file src jalankan "Backend.py" di cmd
-- Copy link localhost pada browser
+1. Masuk ke folder hasil clone git repository
+2. Arahkan direktori ke src
+3. Jalankan 'Backend.py" di terminal
+4. Copy link local yang tersedia di terminal pada browser
 
 ## Features
 List of features ready and TODOs for future development
