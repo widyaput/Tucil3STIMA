@@ -91,12 +91,14 @@
                                             <input class="btn btn-outline-primary" type="submit" name = "pilihkota" value = "Pilih Kota"></input>
                                             <select class="form-select" name="comp_select" id="inputGroupSelect01">
                                                 <option value="1" name = "city">Choose..</option>
-                                                <option value="2" name = "city">ITB</option>
-                                                <option value="3" name = "city">Alun-Alun Bandung</option>
-                                                <option value="4" name = "city">Buahbatu</option>
-                                                <option value="5" name = "city">Kebumen</option>
-                                                <option value="6" name = "city">Sekitar ITB</option>
-                                                <option value="7" name = "city">Tayu</option>
+                                                <option value="2" {% if comp_select == "2" %} selected {% endif %} name = "2">ITB</option>
+                                                <option value="3" {% if comp_select == "3" %} selected {% endif %} name = "3">Alun-Alun Bandung</option>
+                                                <option value="4" {% if comp_select == "4" %} selected {% endif %} name = "4">Buahbatu</option>
+                                                <option value="5" {% if comp_select == "5" %} selected {% endif %} name = "5">Kebumen</option>
+                                                <option value="6" {% if comp_select == "6" %} selected {% endif %} name = "6">Sekitar ITB</option>
+                                                <option value="7" {% if comp_select == "7" %} selected {% endif %} name = "7">Tayu</option>
+                                                <option value="8" {% if comp_select == "8" %} selected {% endif %} name = "8">Blitar</option>
+                                                <option value="9" {% if comp_select == "9" %} selected {% endif %} name = "9">Monas</option>
                                             </select>
                                             
                                         </div>
@@ -239,7 +241,7 @@
     <!-- Footer-->
         <div class="footer bg-primary text-white text-center">
             <div class="footer">
-                <h5>Created by <a href="https://www.instagram.com/tararahuuw/" class = "text-white fw-bold">Muhammad Fahmi Alamsyah</a></h5>
+                <h5>Created by <a href="https://www.instagram.com/tararahuuw/" class = "text-white fw-bold">Muhammad Fahmi Alamsyah</a> X <a href="https://www.instagram.com/widwitty/" class = "text-white fw-bold">Widya Anugrah Putra</a></h5>
             </div> 
         </div>
     <!-- Footer-->

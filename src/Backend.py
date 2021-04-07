@@ -41,7 +41,10 @@ def test():
             adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("graf.txt")
         elif (pilihankota == 7) :
             adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("tayu.txt")
-    
+        elif (pilihankota == 8) :
+            adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("blitar.txt")
+        elif (pilihankota == 9) :
+            adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("monas.txt")
         if request.method == 'POST':
             if (pilihankota == 1):
                 fig5=Figure(height=550,width=750)
@@ -70,6 +73,7 @@ def test():
         f1.add_to(m5) 
         folium.LayerControl().add_to(m5)
         m5.save('templates/map.html')
+        return render_template('GoogleMaps.html', comp_select = str(pilihankota))
     
     if (request.form.get("search")):
         if (pilihankota == 2) :
@@ -90,7 +94,12 @@ def test():
         elif (pilihankota == 7) :
             adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("tayu.txt")
             path, isNodeFound, isPathFound = main.main(adjMatrix,listNode,listCoor,firstloc,endloc)
-        
+        elif (pilihankota == 8) :
+            adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("blitar.txt")
+            path, isNodeFound, isPathFound = main.main(adjMatrix,listNode,listCoor,firstloc,endloc)
+        elif (pilihankota == 9) :
+            adjMatrix, listNode, listCoor, isFileFound = main.bacaFile("monas.txt")
+            path, isNodeFound, isPathFound = main.main(adjMatrix,listNode,listCoor,firstloc,endloc)
         if request.method == 'POST':
             if (pilihankota == 1):
                 fig5=Figure(height=550,width=750)
@@ -118,7 +127,7 @@ def test():
                 folium.LayerControl().add_to(m5)
                 m5.save('templates/map.html')
                 flash('Tidak ditemukan lokasi yang sesuai')
-                return render_template('GoogleMaps.html')
+                return render_template('GoogleMaps.html', comp_select = str(pilihankota))
             elif (not isPathFound):
                 fig5=Figure(height=550,width=750)
                 middle = main.middlePoint(listCoor)
@@ -136,7 +145,7 @@ def test():
                 folium.LayerControl().add_to(m5)
                 m5.save('templates/map.html')
                 flash('Tidak ditemukan jalan menuju lokasi tujuan')
-                return render_template('GoogleMaps.html')
+                return render_template('GoogleMaps.html',comp_select = str(pilihankota))
             else:
                 for i in range(len(path)-1):
                     listJalan.append([listCoor[path[i]],listCoor[path[i+1]]])
